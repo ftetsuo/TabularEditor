@@ -1,4 +1,4 @@
---Apply default config for columns (Summarize By = None | Available in MDX = false)
+//Apply default config for columns (Summarize By = None | Available in MDX = false)
 foreach (var table in Model.Tables)
 {
   foreach (var column in table.Columns)
