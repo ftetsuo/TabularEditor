@@ -1,11 +1,15 @@
---Source: https://exceleratorbi.com.au/edit-replace-code-inside-all-dax-measures-using-tabular-editor/
 
 var FromString = "old string";
 var ToString = "new string";
 
-foreach (var m in Model.AllMeasures)
-    {
-        m.Name = m.Name.Replace(FromString,ToString);
-        /* Cycle over all measures in model and replaces the 
-           FromString with the ToString in the measure names*/
-    }
+/* Cycle over all measures in model and replaces the 
+    FromString with the ToString in the measure names*/
+foreach (var m in Model.AllMeasures){
+    m.Name = m.Name.Replace(FromString,ToString);
+}
+
+// Trim and replace double spaces by single spaces in measure names
+foreach(var m in Model.AllMeasures){
+    m.Name = m.Name.Trim();
+    m.Name = m.Name.Replace("  ", " ");
+}
