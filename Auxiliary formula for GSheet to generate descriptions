@@ -1,0 +1,7 @@
+--Apply the formula below in a Google spreadsheet and replace the variables (TABLE_NAME, COLUMN_NAME, DESCRIPTION) to generate a script to be executed in the tabular editor to 
+add description to table columns:
+	="Model.Tables["""&SUBSTITUTE(TABLE_NAME,"""","\""")&"""].Columns["""&SUBSTITUTE(COLUMN_NAME,"""","\""")&"""].Description = """&SUBSTITUTE(DESCRIPTION,"""","\""")&""";"
+
+--Apply the formula below in a Google spreadsheet and replace the variables (TABLE_NAME, COLUMN_NAME, DESCRIPTION) to generate a script to be executed in the tabular editor to 
+add description to table measures:	
+	="Model.Tables["""&SUBSTITUTE(TABLE_NAME,"""","\""")&"""].Measures["""&SUBSTITUTE(COLUMN_NAME,"""","\""")&"""].Description = """&SUBSTITUTE(DESCRIPTION,"""","\""")&""";"
