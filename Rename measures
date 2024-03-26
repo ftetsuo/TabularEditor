@@ -1,0 +1,11 @@
+--Source: https://exceleratorbi.com.au/edit-replace-code-inside-all-dax-measures-using-tabular-editor/
+
+var FromString = "old string";
+var ToString = "new string";
+
+foreach (var m in Model.AllMeasures)
+    {
+        m.Name = m.Name.Replace(FromString,ToString);
+        /* Cycle over all measures in model and replaces the 
+           FromString with the ToString in the measure names*/
+    }
