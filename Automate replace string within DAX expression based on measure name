@@ -1,0 +1,12 @@
+List<String> myList = new List<String>();
+myList.Add("MeasureName01");
+myList.Add("MeasureName02");
+myList.Add("MeasureName03");
+
+foreach(var m in Model.AllMeasures)
+{
+    if(myList.Contains(m.Name))
+    {
+        m.Expression = m.Expression.Replace("Old DAX Expression", "New DAX Expression");
+    }
+}
