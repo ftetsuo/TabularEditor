@@ -1,0 +1,32 @@
+// c:\Test\MyMeasures.tsv is a tab-separated file with a header row and 3 columns: Table	DisplayFolder	Name	Expression	FormatString
+var measureMetadata = ReadFile(@"C:\..\..\..\FileName.tsv");   
+
+// Split the file into rows by CR and LF characters:
+var tsvRows = measureMetadata.Split(new[] {'\r','\n'},StringSplitOptions.RemoveEmptyEntries);
+
+// Loop through all rows but skip the first one:
+foreach(var row in tsvRows.Skip(1)){
+  var tsvColumns = row.Split('\t');     // Assume file uses tabs as column separator
+  var tableName = tsvColumns[0];        // Table name which will hold the measures
+  var displayFolder = tsvColumns[1];    // DisplayFolder which will hold the measures
+  var name = tsvColumns[2];             // Measure name
+  var description = tsvColumns[3];      // Measure description
+  var expression = tsvColumns[4];       // Measure expression
+  var formatString = tsvColumns[5];     // FormatString
+  
+  // Name of the table that should hold the measures
+  var targetTable = Model.Tables[tableName];  
+  
+  // If the measure already exist, then delete it to avoid creating a measure with a numeric suffix
+  if (targetTable.Measures.Contains(name)){ 
+    targetTable.Measures[name].Delete();
+  }
+  
+  // This assumes that the model does not already contain a measure with the same name (if it does, the new measure will get a numeric suffix):
+  var measure = targetTable.AddMeasure(name);
+  measure.Description = description;
+  measure.DisplayFolder = displayFolder;
+  measure.Expression = expression;
+  measure.FormatString = formatString;
+  measure.FormatDax();
+}
