@@ -1,4 +1,3 @@
-
 var FromString = "old string";
 var ToString = "new string";
 
