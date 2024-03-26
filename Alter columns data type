@@ -1,0 +1,13 @@
+--from float to decimal
+foreach (var table in Model.Tables)
+{
+    foreach (var column in table.Columns)
+    {
+        // Check if the data type is "Floating Point / Decimal Number (double)"
+        if (column.DataType == DataType.Double)
+        {
+            // Apply the datatype DataType.Decimal 
+            column.DataType = DataType.Decimal;
+        }
+    }
+};
