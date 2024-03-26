@@ -56,3 +56,18 @@ foreach (var table in Model.Tables)
         }    
     }
 };
+
+--format integer removing format string and make its hidden based on column name contains condition
+foreach (var table in Model.Tables)
+{
+    foreach (var column in table.Columns)
+    {
+        // Check if the data type is "Integer / Whole Number (int64)"
+        if (column.DataType == DataType.Int64 && column.Name.Contains(" Key"))
+        {
+            // Remove format string
+            column.FormatString = "";
+            column.IsHidden = true;
+        }
+    }    
+};
