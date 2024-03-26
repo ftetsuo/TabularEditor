@@ -1,0 +1,17 @@
+--Apply default config for columns (Summarize By = None | Available in MDX = false)
+foreach (var table in Model.Tables)
+{
+  foreach (var column in table.Columns)
+  {
+    column.SummarizeBy = AggregateFunction.None;
+    
+    if (table.Name == "Calendar" && (column.Name == "Year" || column.Name == "Quarter Short" || column.Name == "Month Year" || column.Name == "Week Year" || column.Name == "Date"))
+    {
+      column.IsAvailableInMDX = true;
+    }
+    else
+    {
+      column.IsAvailableInMDX = false;
+    }
+  }    
+}
