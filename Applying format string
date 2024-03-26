@@ -1,0 +1,58 @@
+--format applies thousands point and two decimal places
+foreach (var table in Model.Tables)
+{
+    foreach (var column in table.Columns)
+    {
+        // Check if the data type is "Currency / Fixed Decimal Number (decimal)"
+        if (column.DataType == DataType.Decimal)
+        {
+            // Apply the format string "#,0.00;-#,0.00"
+            column.FormatString = "#,0.00;-#,0.00";
+        }
+    }
+};
+
+--format date columns
+foreach (var table in Model.Tables)
+{
+    foreach (var column in table.Columns)
+    {
+        // Check if the data type is "DateTime"
+        if (column.DataType == DataType.DateTime)
+        {
+            // Apply the format string "MM/dd/yyyy"
+            column.FormatString = "MM/dd/yyyy";
+        }
+    }
+};
+
+--format integer with thousands point
+foreach (var table in Model.Tables)
+{
+    foreach (var column in table.Columns)
+    {
+        // Check if the data type is "Integer / Whole Number (int64)"
+        if (column.DataType == DataType.Int64)
+        {
+            // Apply the format string "#,0"
+            column.FormatString = "#,0";
+        }
+    }
+};
+
+--format integer without thousands point
+foreach (var table in Model.Tables)
+{
+    if (table.Name.ToString().Contains("Calendar"))
+    {
+        foreach (var column in table.Columns)
+        {
+            // Check if the data type is "Integer / Whole Number (int64)"
+            if (column.DataType == DataType.Int64)
+            {
+                // Apply the format string "0"
+                column.FormatString = "0";
+            }
+        }    
+    }
+};
