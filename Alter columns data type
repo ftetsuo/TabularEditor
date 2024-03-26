@@ -1,4 +1,4 @@
---from float to decimal
+//from float to decimal
 foreach (var table in Model.Tables)
 {
     foreach (var column in table.Columns)
