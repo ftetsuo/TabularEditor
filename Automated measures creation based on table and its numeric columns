@@ -1,0 +1,32 @@
+--Automated measures creation based on table and its numeric columns 
+
+var sourceTable = Model.Tables["TableName"];
+
+foreach(var c in sourceTable.Columns)
+{
+    if ((c.DataType == DataType.Int64 && !c.Name.Contains("pattern1") && !c.Name.Contains("pattern2") && !c.Name.Contains("pattern3")) || (c.DataType == DataType.Decimal))
+    {
+        var newMeasure = c.Table.AddMeasure(
+            "Average of " + c.Name,                    // Name
+            "AVERAGE(" + c.DaxObjectFullName + ")",    // DAX expression
+            "DisplayFolderName"                        // Display Folder
+        );
+
+        // Set the format string on the new measure:
+        if (c.DataType == DataType.Int64)
+        {
+            newMeasure.FormatString = "#,0";
+        }
+        else if (c.DataType == DataType.Decimal)
+        {
+            newMeasure.FormatString = "#,0.00;-#,0.00";
+        }
+        
+
+        // Provide some documentation:
+        newMeasure.Description = "This measure is the average of column " + c.DaxObjectFullName + ". Plain averages of the columns in the table. Apply filters accordingly before using these measures, to adjust granularity of your analysis.";
+
+        // Hide the base column:
+        //c.IsHidden = true;   
+    }
+}
