@@ -1,4 +1,4 @@
---Automated measures creation based on table and its numeric columns 
+//Automated measures creation based on table and its numeric columns 
 
 var sourceTable = Model.Tables["TableName"];
 
